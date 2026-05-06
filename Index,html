@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>จองโต๊ะ6/1</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+
+/* ห้อง */
+.room {
+  width: 700px;
+  margin: auto;
+  padding: 20px;
+  border: 3px solid #555;
+  position: relative;
+}
+
+/* ด้านหน้า */
+.front {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #ff4da6;
+}
+
+/* องค์ประกอบ */
+.teacher {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  background: orange;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.tv {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  background: #00c3ff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.door-front {
+  position: absolute;
+  top: 10px;
+  left: 120px;
+  background: #888;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.door-back {
+  position: absolute;
+  bottom: 10px;
+  left: 120px;
+  background: #888;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.window {
+  position: absolute;
+  right: -40px;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  background: #00c3ff;
+  writing-mode: vertical-rl;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* โต๊ะ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  margin-top: 100px;
+}
+
+.table {
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.seats {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.seat {
+  width: 18px;
+  height: 18px;
+  background: #666;
+  border-radius: 50%;
+}
+
+.label {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.taken {
+  background: red !important;
+}
+</style>
+</head>
+
+<body>
+
+<h1>จองโต๊ะ6/1 💖</h1>
+
+<div class="room">
+
+  <div class="front">หน้าห้อง / กระดาน</div>
+
+  <!-- องค์ประกอบ -->
+  <div class="teacher">โต๊ะครู</div>
+  <div class="tv">TV</div>
+  <div class="door-front">🚪 ประตูหน้า</div>
+  <div class="door-back">🚪 ประตูหลัง</div>
+  <div class="window">หน้าต่าง</div>
+
+  <!-- โต๊ะ -->
+  <div class="grid" id="tables"></div>
+
+</div>
+
+<script>
+const container = document.getElementById("tables");
+
+for (let i = 1; i <= 36; i++) {
+  let table = document.createElement("div");
+  table.className = "table";
+
+  let seats = document.createElement("div");
+  seats.className = "seats";
+
+  let seat1 = document.createElement("div");
+  seat1.className = "seat";
+
+  let seat2 = document.createElement("div");
+  seat2.className = "seat";
+
+  seats.appendChild(seat1);
+  seats.appendChild(seat2);
+
+  let label = document.createElement("div");
+  label.className = "label";
+  label.innerText = "โต๊ะ " + (i < 10 ? "0"+i : i);
+
+  table.appendChild(seats);
+  table.appendChild(label);
+
+  table.onclick = function() {
+    if (table.classList.contains("taken")) return;
+
+    let name = prompt("ชื่อผู้จอง:");
+    if (!name) return;
+
+    table.classList.add("taken");
+    label.innerText = "จองแล้ว (" + name + ")";
+  };
+
+  container.appendChild(table);
+}
+</script>
+
+</body>
+</html>
