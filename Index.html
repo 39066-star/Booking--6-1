@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>จองโต๊ะ6/1</title>
+<style>
+body { font-family:sans-serif; text-align:center; background:#111; color:#fff; }
+h1 { color:#ff4da6; }
+.grid { display:grid; grid-template-columns:repeat(6,1fr); gap:10px; max-width:420px; margin:auto; }
+button { padding:15px; border:none; border-radius:10px; background:#333; color:#fff; cursor:pointer; }
+button:hover { background:#ff4da6; }
+.taken { background:red; }
+</style>
+</head>
+<body>
+
+<h1>จองโต๊ะ6/1 💖</h1>
+<p>โต๊ะคู่ 36 โต๊ะ (2 คน)</p>
+
+<div class="grid" id="tables"></div>
+
+<script>
+const tables = document.getElementById("tables");
+
+for (let i = 1; i <= 36; i++) {
+  let btn = document.createElement("button");
+  let num = i < 10 ? "0"+i : i;
+  btn.innerText = "โต๊ะ " + num;
+
+  btn.onclick = function() {
+    if (btn.classList.contains("taken")) return;
+    let name = prompt("กรอกชื่อผู้จอง:");
+    if (!name) return;
+    btn.classList.add("taken");
+    btn.innerText = "จองแล้ว (" + name + ")";
+  };
+
+  tables.appendChild(btn);
+}
+</script>
+
+</body>
+</html>
